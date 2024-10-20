@@ -4,31 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Quote Generator</title>
+    <style>
+      /* Basic styling for body and headings */
+      body {
+        font-family: Arial, sans-serif; /* Use a clean, sans-serif font */
+        margin: 20px; /* Add margin to the body */
+        background-color: #f9f9f9; /* Light background color */
+        color: #333; /* Dark text color for contrast */
+      }
+      h1 {
+        color: #2c3e50; /* Darker color for the main heading */
+      }
+      button {
+        padding: 10px 15px; /* Add padding to buttons */
+        margin: 5px 0; /* Space between buttons */
+        cursor: pointer; /* Change cursor to pointer on hover */
+      }
+      input[type="file"],
+      select {
+        padding: 5px; /* Add padding to input and select elements */
+        margin: 5px 0; /* Space between elements */
+      }
+    </style>
   </head>
   <body>
     <br />
-    <h1>Dynamic Quote Generator</h1>
-    <div id="quoteDisplay"></div>
+    <h1>Dynamic Quote Generator</h1> <!-- Main title of the page -->
+    
+    <div id="quoteDisplay"></div> <!-- Div to display the selected quote -->
+    
     <br />
-    <button id="newQuote">Show New Quote</button>
+    <button id="newQuote">Show New Quote</button> <!-- Button to fetch a new quote -->
+    
     <br />
     <input
       type="file"
       id="importFile"
       accept=".json"
-      onchange="importFromJsonFile(event)"
+      onchange="importFromJsonFile(event)" <!-- Function to handle file import -->
     />
+    
     <br />
-    <button id="expBTN">Export Quotes</button>
+    <button id="expBTN">Export Quotes</button> <!-- Button to export quotes -->
+    
     <br /><br />
 
-    <select id="categoryFilter" onchange="filterQuotes()">
+    <select id="categoryFilter" onchange="filterQuotes()"> <!-- Dropdown for filtering categories -->
       <option value="all">All Categories</option>
-      <!-- Dynamically populated categories -->
+      <!-- Dynamically populated categories will be added here -->
     </select>
+    
     <br />
     <br />
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Link to the external JavaScript file -->
   </body>
 </html>
