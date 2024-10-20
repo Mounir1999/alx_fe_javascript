@@ -229,6 +229,4 @@ async function fetchQuotesFromServer() {
 async function syncQuotesWithServer() {
   try {
     const serverQuotes = await fetchQuotesFromServer();
-    let localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
-
-    // Merge server quotes with local ones (
+    let localQuotes = JSON.parse(localStorage.getItem("quotes")) ||
