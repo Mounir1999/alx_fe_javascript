@@ -20,6 +20,11 @@ function saveQuotes() {
 
 // Function to display a random quote
 function showRandomQuote() {
+    if (quotes.length === 0) {
+        document.getElementById('quoteDisplay').innerHTML = "<p>No quotes available.</p>";
+        return;
+    }
+
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const selectedQuote = quotes[randomIndex];
 
@@ -53,8 +58,11 @@ function addQuote() {
     }
 }
 
+// Event listeners
+document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+document.getElementById('addQuoteButton').addEventListener('click', addQuote);
+
 // Load quotes when the page loads
 window.onload = function() {
     loadQuotes();
-    document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 };
