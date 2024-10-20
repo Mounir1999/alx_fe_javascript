@@ -15,20 +15,23 @@ let quotes = [
   // Attach event listener to the "Show New Quote" button
   document.getElementById('newQuote').addEventListener('click', showRandomQuote);
   function addQuote() {
-    const newQuoteText = document.getElementById('newQuoteText').value;
-    const newQuoteCategory = document.getElementById('newQuoteCategory').value;
-  
-    if (newQuoteText && newQuoteCategory) {
-      // Add the new quote to the quotes array
-      quotes.push({ text: newQuoteText, category: newQuoteCategory });
-  
-      // Clear the input fields after adding
-      document.getElementById('newQuoteText').value = '';
-      document.getElementById('newQuoteCategory').value = '';
-  
-      alert('New quote added!');
-    } else {
-      alert('Please enter both a quote and a category.');
-    }
+  const newQuoteText = document.getElementById('newQuoteText').value.trim();
+  const newQuoteCategory = document.getElementById('newQuoteCategory').value.trim();
+
+  // Check if both fields are filled
+  if (newQuoteText && newQuoteCategory) {
+    // Add the new quote to the quotes array
+    quotes.push({ text: newQuoteText, category: newQuoteCategory });
+
+    // Clear input fields after adding the quote
+    document.getElementById('newQuoteText').value = '';
+    document.getElementById('newQuoteCategory').value = '';
+
+    alert('New quote added successfully!');
+  } else {
+    // If either field is empty, alert the user
+    alert('Please enter both a quote and a category.');
   }
+}
+
       
