@@ -1,19 +1,11 @@
 let container = document.getElementById("quoteDisplay");
 let btn = document.getElementById("newQuote");
+let exportBtn = document.getElementById("expBTN");
 
 let quoteArray = [
-  {
-    text: "It takes courage to grow up and become who you really are.— E.E. Cummings",
-    category: "Motivational",
-  },
-  {
-    text: "The best preparation for tomorrow is doing your best today. H. Jackson Brown",
-    category: "Inspirational",
-  },
-  {
-    text: "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.― Albert Einstein",
-    category: "Humor",
-  },
+  { text: "It takes courage to grow up and become who you really are.— E.E. Cummings", category: "Motivational" },
+  { text: "The best preparation for tomorrow is doing your best today. H. Jackson Brown", category: "Inspirational" },
+  { text: "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.― Albert Einstein", category: "Humor" },
 ];
 
 // Load quotes from local storage
@@ -35,76 +27,42 @@ function showRandomQuote() {
   container.innerHTML = `'${quoteArray[randomNum].text}' - '${quoteArray[randomNum].category}'`;
 }
 
-// Creating the form dynamically
-function createAddQuoteForm() {
-  let container = document.createElement("div");
-  container.id = "quoteForm";
-
-  let inputText = document.createElement("input");
-  inputText.id = "newQuoteText";
-  inputText.type = "text";
-  inputText.placeholder = "Enter a new quote";
-
-  let inputCategory = document.createElement("input");
-  inputCategory.id = "newQuoteCategory";
-  inputCategory.type = "text";
-  inputCategory.placeholder = "Enter quote category";
-
-  let addQBtn = document.createElement("button");
-  addQBtn.id = "addQuoteButton";
-  addQBtn.textContent = "Add Quote";
-
-  container.appendChild(inputText);
-  container.appendChild(inputCategory);
-  container.appendChild(addQBtn);
-  document.body.appendChild(container);
-  
-  // Apply the addQuote function to the button
-  addQBtn.addEventListener("click", addQuote);
-}
-
 // Function to add a quote to the array
 function addQuote() {
   let inQuote = document.getElementById("newQuoteText").value.trim();
   let inCategory = document.getElementById("newQuoteCategory").value.trim();
   if (inQuote && inCategory) {
     quoteArray.push({ text: inQuote, category: inCategory });
-
-    // Call saveQuotes function to save the new quote in localStorage
     saveQuotes();
     alert("You successfully added a new quote.");
-
-    // Clear the input fields
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
-    
-    populateCategories(); // Update categories after adding a new quote
   } else {
     alert("You must fill both quote & category fields.");
   }
 }
 
-// Populate the category filter dropdown with unique categories
-function populateCategories() {
-  let categoryFilter = document.getElementById("categoryFilter");
-  categoryFilter.innerHTML = ""; // Clear existing options
-  const uniqueCategories = [...new Set(quoteArray.map((quote) => quote.category))];
+// Export quotes to a JSON file
+function exportToJsonFile() {
+  const dataStr = JSON.stringify(quoteArray, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = "quotes.json";
   
-  uniqueCategories.forEach((category) => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    categoryFilter.appendChild(option);
-  });
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  URL.revokeObjectURL(url);
 }
 
 // Initialize on page load
 window.onload = function () {
   loadQuotes();
-  populateCategories();
-  createAddQuoteForm();
   showRandomQuote(); // Show a random quote on initial load
+  document.getElementById("addQuoteButton").addEventListener("click", addQuote);
+  exportBtn.addEventListener("click", exportToJsonFile);
+  btn.addEventListener("click", showRandomQuote);
 };
-
-// Adding event listener to the button
-btn.addEventListener("click", showRandomQuote);
