@@ -21,19 +21,10 @@
     <button id="addQuoteButton">Add Quote</button>
   </div>
 
-  <!-- Button to export quotes as JSON -->
+  <!-- Export and Import Section -->
   <button id="exportQuotes">Export Quotes as JSON</button>
-
-  <!-- File input to import quotes from a JSON file -->
   <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
-  <!-- Link to the script -->
   <script src="script.js"></script>
 </body>
 </html>
-<div>
-  <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-  <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-  <button onclick="addQuote()">Add Quote</button>
-</div>
-
